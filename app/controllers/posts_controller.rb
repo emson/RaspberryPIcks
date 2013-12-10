@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
   end
 
   # GET /posts/1
@@ -24,7 +24,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    # merge current_user.id into params
+    merged_params = post_params.merge(user_id: current_user.id)
+    @post = Post.new(merged_params)
 
     respond_to do |format|
       if @post.save

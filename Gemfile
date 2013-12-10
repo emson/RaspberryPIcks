@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'devise'
 
 group :production do
   gem 'pg'
@@ -24,7 +25,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :doc do

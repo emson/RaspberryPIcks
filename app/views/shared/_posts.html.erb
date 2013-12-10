@@ -1,0 +1,11 @@
+
+<ul>
+  <% @posts.each do |post| %>
+  <li>
+    <%= link_to post.title, post.url %></br>
+    <%= post.points %> | comments
+  </li>
+  <% end %>
+</ul>
+
+

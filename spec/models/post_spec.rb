@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Post do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should validate on title" do
+    attrs = FactoryGirl.attributes_for(:post)
+    attrs.delete(:title)
+    Post.new(attrs).should_not be_valid
+  end
 end

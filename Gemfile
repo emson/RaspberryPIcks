@@ -26,6 +26,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :doc do

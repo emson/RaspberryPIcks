@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
+gem 'foundation-rails'
 
 group :production do
   gem 'pg'
@@ -23,10 +24,13 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'pry-rails'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
 end
 
 group :doc do

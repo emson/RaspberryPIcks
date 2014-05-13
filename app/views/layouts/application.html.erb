@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
   <title>RaspberryPIcks</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "vendor/modernizr" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class='row'>
+  <div class='small-centered'>
 
-  <header>
-    <h1>RaspberryPIcks - User submitted Raspberry Pi news</h1>
-    <nav>
-      <ul>
-        <li><%= link_to('new', root_path) %></li>
-        <li><%= link_to('submit', new_post_path) %></li>
-        <li><%= login_logout %></li>
-      </ul>
-    </nav>
-  </header>
+    <header class='row'>
+      <nav>
+        <div class='small-4 columns'>
+          <h1>RaspberryPIcks</h1>
+          <p>User submitted Raspberry Pi news</p>
+        </div>
+        <div class='small-8 columns'>
+          <ul class='inline-list'>
+            <li><%= link_to('new', root_path) %></li>
+            <li><%= link_to('submit', new_post_path) %></li>
+            <li><%= login_logout %></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-  <div role='main'>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <main>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+      <%= yield %>
+    </main>
+
   </div>
-
 </body>
 </html>

@@ -12,4 +12,5 @@ FactoryGirl.define do
     url 'http://some.domain.com/my-post'
     user_id 1
   end
+
 end

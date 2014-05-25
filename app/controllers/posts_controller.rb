@@ -24,18 +24,23 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    # merge current_user.id into params
-    merged_params = post_params.merge(user_id: current_user.id)
-    @post = Post.new(merged_params)
+    if user_signed_in?
+      # merge current_user.id into params
+      merged_params = post_params.merge(user_id: current_user.id)
+      @post = Post.new(merged_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @post }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      @post = Post.new({})
+      render action: 'new' unless user_signed_in?# TODO check this works, turn off create post button if not signed in to check
     end
   end
 

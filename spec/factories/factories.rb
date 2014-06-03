@@ -8,8 +8,10 @@ FactoryGirl.define do
   end
 
   factory :post do
-    title 'some post title'
-    url 'http://some.domain.com/my-post'
+    sequence(:title) { |n| "My great creation #{n}" }
+    sequence(:url) {   |n| "https://#{n}.greatcreation.com" }
+    sequence(:text) {  |n| "All about my great creation #{n}." }
+    points 1
     user_id 1
   end
 

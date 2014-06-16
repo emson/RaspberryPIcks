@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # add cancan authorizing
+  load_and_authorize_resource
 
   # GET /posts
   # GET /posts.json
@@ -40,7 +42,7 @@ class PostsController < ApplicationController
       end
     else
       @post = Post.new({})
-      render action: 'new' unless user_signed_in?# TODO check this works, turn off create post button if not signed in to check
+      render action: 'new'
     end
   end
 

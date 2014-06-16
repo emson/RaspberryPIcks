@@ -20,23 +20,26 @@ require 'spec_helper'
 
 describe PostsController do
 
-  # # This should return the minimal set of attributes required to create a valid
-  # # Post. As you add validations to Post, be sure to
-  # # adjust the attributes here as well.
-  # let(:valid_attributes) { { "title" => "MyString" } }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:post) }
 
   # # This should return the minimal set of values that should be in the session
   # # in order to pass any filters (e.g. authentication) defined in
   # # PostsController. Be sure to keep this updated too.
-  # let(:valid_session) { {} }
+  let(:valid_session) { {} }
 
-  # describe "GET index" do
-  #   it "assigns all posts as @posts" do
-  #     post = Post.create! valid_attributes
-  #     get :index, {}, valid_session
-  #     assigns(:posts).should eq([post])
-  #   end
-  # end
+  let(:user) { FactoryGirl.create(:user) }
+
+  before :each do
+    sign_in user
+  end
+
+  describe "GET index" do
+    it "assigns all posts as @posts" do
+      url_post = Post.create! valid_attributes
+      get :index, {}, valid_session
+      assigns(:posts).should eq([url_post])
+    end
+  end
 
   # describe "GET show" do
   #   it "assigns the requested post as @post" do
@@ -46,20 +49,20 @@ describe PostsController do
   #   end
   # end
 
-  # describe "GET new" do
-  #   it "assigns a new post as @post" do
-  #     get :new, {}, valid_session
-  #     assigns(:post).should be_a_new(Post)
-  #   end
-  # end
+  describe "GET new" do
+    it "assigns a new post as @post" do
+      get :new, {}, valid_session
+      assigns(:post).should be_a_new(Post)
+    end
+  end
 
-  # describe "GET edit" do
-  #   it "assigns the requested post as @post" do
-  #     post = Post.create! valid_attributes
-  #     get :edit, {:id => post.to_param}, valid_session
-  #     assigns(:post).should eq(post)
-  #   end
-  # end
+  describe "GET edit" do
+    it "assigns the requested post as @post" do
+      my_post = user.posts.create!(FactoryGirl.attributes_for(:post))
+      get :edit, {:id => my_post.to_param}, valid_session
+      assigns(:post).should eq(my_post)
+    end
+  end
 
   # describe "POST create" do
   #   describe "with valid params" do

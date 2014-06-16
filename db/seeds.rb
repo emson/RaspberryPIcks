@@ -5,8 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+puts
+puts 'Seeding...'
+puts
 
-user = User.create(username:'emson', password:'password', email:'mail@emson.co.uk')
+user = User.create(username:'emson', password:'password', email:'mail@emson.co.uk', role:'admin')
+user = User.create(username:'snoopy', password:'password', email:'snoopey@woodstock.co.uk')
 
 Post.create(user_id:user.id, title:"Turn any application that uses STDIN/STDOUT into a WebSocket server", url:'https://github.com/joewalnes/websocketd')
 Post.create(user_id:user.id, title:"New US spy satellite features world-devouring octopus", url:'http://arstechnica.com/tech-policy/2013/12/new-us-spy-satellite-features-world-devouring-octopus/')

@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # add cancan authorizing
+  load_and_authorize_resource
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
   end
 
   # GET /posts/1
@@ -24,16 +26,23 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    if user_signed_in?
+      # merge current_user.id into params
+      merged_params = post_params.merge(user_id: current_user.id)
+      @post = Post.new(merged_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @post }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      @post = Post.new({})
+      render action: 'new'
     end
   end
 

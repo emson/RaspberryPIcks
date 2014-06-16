@@ -3,7 +3,7 @@
   <% @posts.each do |post| %>
   <li>
     <%= link_to post.title, post.url %></br>
-    <%= post.points %> | comments
+    <%= pluralize(post.points, 'point') %> by <%= poster(post) %> | <%= link_to "comments", post %>
   </li>
   <% end %>
 </ul>

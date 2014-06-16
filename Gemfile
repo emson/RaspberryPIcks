@@ -14,6 +14,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'devise'
+gem 'foundation-rails'
+gem 'cancan'
 
 group :production do
   gem 'pg'
@@ -22,9 +25,12 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'capybara'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'pry'
+  gem 'pry-rails'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
 end
 
 group :doc do

@@ -1,3 +1,8 @@
+
+<% unless user_signed_in? %>
+  <h1>Please <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %> to submit a post</h1>
+<% end %>
+
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -12,22 +17,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label :url %><br>
+    <%= f.text_field :url, { disabled: disabled_unless_loggedin, placeholder: 'http://www.lego.com'} %>
   </div>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, { disabled: disabled_unless_loggedin, placeholder: 'Amazing Lego web site' } %>
   </div>
   <div class="field">
     <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </div>
-  <div class="field">
-    <%= f.label :points %><br>
-    <%= f.number_field :points %>
+    <%= f.text_area :text, { disabled: disabled_unless_loggedin, placeholder: 'Everything you need to know about Lego.' } %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit if user_signed_in? %>
   </div>
 <% end %>

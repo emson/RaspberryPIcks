@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'foundation-rails'
 gem 'cancan'
+gem 'will_paginate', '~> 3.0'
 
 group :production do
   gem 'pg'

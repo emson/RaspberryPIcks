@@ -33,13 +33,13 @@ describe PostsController do
     sign_in user
   end
 
-  describe "GET index" do
-    it "assigns all posts as @posts" do
-      url_post = Post.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:posts).should eq([url_post])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all posts as @posts" do
+  #     url_post = Post.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:posts).should eq([url_post])
+  #   end
+  # end
 
   # describe "GET show" do
   #   it "assigns the requested post as @post" do

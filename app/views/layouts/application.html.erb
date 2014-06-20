@@ -15,12 +15,12 @@
     <header class='row'>
       <nav>
         <div class='small-4 columns'>
-          <h1>RaspberryPIcks</h1>
+          <h1><%= link_to 'RaspberryPIcks', root_path %></h1>
           <p>User submitted Raspberry Pi news</p>
         </div>
         <div class='small-8 columns'>
           <ul class='inline-list'>
-            <li><%= link_to('new', root_path) %></li>
+            <li><%= link_to('new', '/newest') %></li>
             <li><%= link_to('submit', new_post_path) %></li>
             <li><%= login_logout %></li>
             <%= register %>

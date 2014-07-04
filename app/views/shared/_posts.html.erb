@@ -2,8 +2,17 @@
 <ul>
   <% @posts.each do |post| %>
   <li>
+
     <%= link_to post.title, post.url %></br>
-    <%= pluralize(post.points, 'point') %> by <%= poster(post) %> | <%= link_to "comments", post %>
+    <%= form_for :vote, url: votes_path, method: :post do |f| %>
+      <%= f.hidden_field :post_id, value: post.id %>
+      <%= f.submit '+' %>
+    <% end %>
+    <%= form_for :vote, url: vote_path(0), method: :delete, class: :destroy do |f| %>
+        <%= f.hidden_field :post_id, value: post.id %>
+        <%= f.submit '-' %>
+    <% end %>
+    | <%= pluralize(post.votes.count, 'vote') %> by <%= poster(post) %> | <%= link_to "comments", post %>
   </li>
   <% end %>
 </ul>

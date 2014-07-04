@@ -14,6 +14,10 @@ class Ability
       can :update, Post do |post|
         user.try(:posts).find(post.id) == post
       end
+
+      can :create, Vote
+      can :destroy, Vote
+
     else
       can :read, :all
     end

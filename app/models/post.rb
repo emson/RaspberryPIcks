@@ -6,5 +6,5 @@ class Post < ActiveRecord::Base
   # has_many :voters, foreign_key: 'user_id', class_name: 'User', through: :votes
   has_many :votes
   validates_presence_of :title
-
+  accepts_nested_attributes_for :votes
 end

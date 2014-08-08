@@ -13,4 +13,12 @@ describe Post do
     Post.new(attrs).should_not be_valid
   end
 
+  it "should on creation also create a vote for that user" do
+    user = FactoryGirl.create(:user)
+    post_attrs = FactoryGirl.attributes_for(:post).merge(user_id: user.id)
+    post = Post.create!(post_attrs)
+    post.user.should == user
+    post.votes.count.should == 1
+  end
+
 end

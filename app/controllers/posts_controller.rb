@@ -28,11 +28,15 @@ class PostsController < ApplicationController
   def create
     if user_signed_in?
       # merge current_user.id into params
-      merged_params = post_params.merge(user_id: current_user.id)
+      user_id = current_user.id
+      merged_params = post_params.merge(user_id: user_id)
       @post = Post.new(merged_params)
 
       respond_to do |format|
         if @post.save
+          # create the first vote for this post
+          @post.votes.create(user_id: user_id)
+          # redirect to main screen
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
           format.json { render action: 'show', status: :created, location: @post }
         else
@@ -71,13 +75,15 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :url, :text, :points)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :url, :slug, :text, :points, :user_id)
+  end
+
 end

@@ -29,13 +29,16 @@ class VotesController < ApplicationController
   # DELETE /votes/1.json
   def destroy
     authorize! :destroy, Vote
-    if params[:id] == '0'
-      if user_signed_in?
+    if user_signed_in?
+      vote_id = params[:id]
+      if vote_id == '0'
         vote = current_user.votes.find_by_post_id(params[:vote][:post_id])
         vote.try(:destroy)
+      else
+        Vote.find(vote_id).destroy
       end
     else
-      Vote.find(params[:id]).destroy
+      # do nothing
     end
     redirect_to root_path
   end

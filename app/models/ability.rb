@@ -12,11 +12,15 @@ class Ability
       can :read, :all
       can :create, Post
       can :update, Post do |post|
+        # can only edit user's own post
         user.try(:posts).find(post.id) == post
       end
 
       can :create, Vote
-      can :destroy, Vote
+      can :destroy, Vote do |vote|
+        # can only delete user's own vote
+        vote.user == user
+      end
 
     else
       can :read, :all

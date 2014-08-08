@@ -1,18 +1,18 @@
 
-<ul>
+<ul class='posts'>
   <% @posts.each do |post| %>
   <li>
 
     <%= link_to post.title, post.url %></br>
     <%= form_for :vote, url: votes_path, method: :post do |f| %>
-      <%= f.hidden_field :post_id, value: post.id %>
-      <%= f.submit '+' %>
+      <%= f.hidden_field :post_id, {value: post.id} %>
+      <%= f.submit '+', {:id => "addVotePost#{post.id}".to_sym, :class => 'addVote'} %>
     <% end %>
     <%= form_for :vote, url: vote_path(0), method: :delete, class: :destroy do |f| %>
-        <%= f.hidden_field :post_id, value: post.id %>
-        <%= f.submit '-' %>
+      <%= f.hidden_field :post_id, {value: post.id} %>
+      <%= f.submit '-', {:id => "delVotePost#{post.id}".to_sym, :class => 'deleteVote'} %>
     <% end %>
-    | <%= pluralize(post.votes.count, 'vote') %> by <%= poster(post) %> | <%= link_to "comments", post %>
+    <span class='postMeta'>| <%= pluralize(post.votes.count, 'vote') %> by <%= poster(post) %> | <%= link_to "comments", post %></span>
   </li>
   <% end %>
 </ul>

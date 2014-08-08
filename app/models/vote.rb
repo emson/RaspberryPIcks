@@ -6,7 +6,7 @@ class Vote < ActiveRecord::Base
   validates_uniqueness_of :combined_params
 
   private
-  
+
   # create a combined column so that we
   # can validate that a user can't vote
   # for the same post more than once.

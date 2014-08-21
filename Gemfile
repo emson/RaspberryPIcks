@@ -16,9 +16,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'foundation-rails'
-gem 'cancan'
 gem 'will_paginate', '~> 3.0'
 gem 'friendly_id', '~> 5.0.0'
+gem 'cancancan', '~> 1.9'
 
 group :production do
   gem 'pg'

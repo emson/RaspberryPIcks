@@ -7,6 +7,7 @@ class Ability
 
     if user.try(:role) == 'admin'
       can :manage, :all
+      can :create, Post
 
     elsif user.try(:role) == 'member'
       can :read, :all

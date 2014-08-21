@@ -62,3 +62,7 @@ RSpec.configure do |config|
 
 end
 
+# Used in our tests
+NUM_POSTS = 3
+
+

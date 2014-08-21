@@ -10,8 +10,9 @@ An aggregated news web site for all things RaspberryPi.
 * Pagination
 * Ensure posts are unique
 
+### Design ideas
 
-#### Maybe:
-
-* Add InstaClick <http://instantclick.io/>
+* <https://quora.com>
+* <https://hotukdeals.com>
+* Newsround CBBC
 

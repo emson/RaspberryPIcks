@@ -1,12 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "main/index" do
-  before(:all) do
-    FactoryGirl.create(:user)
-    NUM_POSTS.times { FactoryGirl.create(:post) }
-  end
 
   before(:each) do
+    FactoryGirl.create(:user)
+    NUM_POSTS.times { FactoryGirl.create(:post) }
     visit '/'
   end
 
@@ -14,7 +12,7 @@ describe "main/index" do
   context 'Main Page: Not logged in visitor' do
 
     it "will display a list of all posts" do
-      expect(page.all('main ul li').count == NUM_POSTS)
+      expect(page.all('ul.posts > li').count).to eq(NUM_POSTS)
     end
 
     it "will link to the submit page" do

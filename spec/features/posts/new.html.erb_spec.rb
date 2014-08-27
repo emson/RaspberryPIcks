@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "posts/new" do
 
@@ -17,7 +17,7 @@ describe "posts/new" do
       expect(field_labeled('Url', disabled: true))
       expect(field_labeled('Title', disabled: true))
       expect(field_labeled('Text', disabled: true))
-      expect(page.should_not have_css('input[type="submit"]'))
+      expect(page).to_not have_css('input[type="submit"]')
     end
 
   end

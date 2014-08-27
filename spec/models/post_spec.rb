@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Post do
 
@@ -17,8 +17,8 @@ describe Post do
     user = FactoryGirl.create(:user)
     post_attrs = FactoryGirl.attributes_for(:post).merge(user_id: user.id)
     post = Post.create!(post_attrs)
-    expect(post.user eq(user))
-    expect(post.votes.count eq(1))
+    expect(post.user).to eq(user)
+    expect(post.votes.count).to eq(1)
   end
 
 end

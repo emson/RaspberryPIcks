@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PostsController do
 
@@ -34,7 +34,7 @@ describe PostsController do
   describe "GET new" do
     it "assigns a new post as @post" do
       get :new, {}, valid_session
-      assigns(:post).should be_a_new(Post)
+      expect(assigns(:post)).to be_a_new(Post)
     end
   end
 
@@ -42,7 +42,7 @@ describe PostsController do
     it "assigns the requested post as @post" do
       my_post = user.posts.create!(FactoryGirl.attributes_for(:post))
       get :edit, {:id => my_post.to_param}, valid_session
-      assigns(:post).should eq(my_post)
+      expect(assigns(:post)).to eq(my_post)
     end
   end
 

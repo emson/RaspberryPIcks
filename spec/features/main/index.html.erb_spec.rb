@@ -1,14 +1,10 @@
-require 'spec_helper'
-
-NUM_POSTS = 3
+require 'rails_helper'
 
 describe "main/index" do
-  before(:all) do
-    FactoryGirl.create(:user)
-    NUM_POSTS.times { FactoryGirl.create(:post) }
-  end
 
   before(:each) do
+    FactoryGirl.create(:user)
+    NUM_POSTS.times { FactoryGirl.create(:post) }
     visit '/'
   end
 
@@ -16,7 +12,7 @@ describe "main/index" do
   context 'Main Page: Not logged in visitor' do
 
     it "will display a list of all posts" do
-      expect(page.all('main ul li').count == NUM_POSTS)
+      expect(page.all('ul.posts > li').count).to eq(NUM_POSTS)
     end
 
     it "will link to the submit page" do
@@ -104,20 +100,3 @@ describe "main/index" do
 
 end
 
-
-# describe "the signin process", :type => :feature do
-
-#   before :each do
-#     User.make(:email => 'user@example.com', :password => 'caplin')
-#   end
-
-#   it "signs me in" do
-#     visit '/sessions/new'
-#     within("#session") do
-#       fill_in 'Login', :with => 'user@example.com'
-#       fill_in 'Password', :with => 'password'
-#     end
-#     click_link 'Sign in'
-#     expect(page).to have_content 'Success'
-#   end
-# end

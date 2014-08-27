@@ -2,7 +2,6 @@
 <ul class='posts'>
   <% @posts.each do |post| %>
   <li>
-
     <%= link_to post.title, post.url %></br>
     <%= form_for :vote, url: votes_path, method: :post do |f| %>
       <%= f.hidden_field :post_id, {value: post.id} %>

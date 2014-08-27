@@ -5,10 +5,11 @@ class Ability
     # Define abilities for the passed in user here. For example:
     user ||= User.new # guest user (not logged in)
 
-    if user.try(:role) == 'admin'
+    if user.try(:role) == User.roles[:admin]
       can :manage, :all
+      can :create, Post
 
-    elsif user.try(:role) == 'member'
+    elsif user.try(:role) == User.roles[:member]
       can :read, :all
       can :create, Post
       can :update, Post do |post|

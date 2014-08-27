@@ -10,6 +10,6 @@ class CreatePosts < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :posts, :slug, unique: true
+    add_index :posts, [:slug, :url], unique: true
   end
 end

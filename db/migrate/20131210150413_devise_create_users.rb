@@ -4,7 +4,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :username, :unique => true
       t.text    :about
       t.integer :karma
-      t.string  :role, :null => false, default: 'member'
+      # TODO USE ENUMS
+      # t.string  :role, :null => false, default: 'member'
+      t.integer :role, null:false, default: User.roles[:member]
 
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Vote do
 
@@ -15,7 +15,7 @@ describe Vote do
 
     it "should create a combined_column" do
       vote = Vote.create!(user_id: 4, post_id: 2)
-      vote.combined_params.should == 42
+      expect(vote.combined_params).to eq(42)
     end
 
     it "should not validate if the combined_params are not unique" do
@@ -27,19 +27,19 @@ describe Vote do
 
   context 'Vote#user' do
     it "should belong to user" do
-      @vote1.user.should == @user1
+      expect(@vote1.user).to eq(@user1)
     end
   end
 
   context 'Vote#post' do
     it "should have a one post" do
-      @vote1.post.should == @post
+      expect(@vote1.post).to eq(@post)
     end
   end
 
   context 'Post#votes' do
     it "should have many votes" do
-      @post.votes.count.should == 2
+      expect(@post.votes.count).to eq(2)
     end
   end
 

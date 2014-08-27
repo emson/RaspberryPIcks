@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  # add cancan authorizing
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :post_params
 
   # GET /posts
   # GET /posts.json
@@ -28,14 +27,15 @@ class PostsController < ApplicationController
   def create
     if user_signed_in?
       # merge current_user.id into params
-      user_id = current_user.id
-      merged_params = post_params.merge(user_id: user_id)
-      @post = Post.new(merged_params)
+      # user_id = current_user.id
+      # merged_params = post_params.merge(user_id: user_id)
+      # @post = Post.new(merged_params)
+      @post = current_user.posts.new(post_params)
 
       respond_to do |format|
         if @post.save
           # create the first vote for this post
-          @post.votes.create(user_id: user_id)
+          @post.votes.create(user_id: current_user.id)
           # redirect to main screen
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
           format.json { render action: 'show', status: :created, location: @post }

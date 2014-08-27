@@ -1,13 +1,9 @@
 class VotesController < ApplicationController
-
-  # add cancan authorizing
-  # load_and_authorize_resource
-
+  # load_and_authorize_resource param_method: :vote_params
 
   # vote /votes
   # vote /votes.json
   def create
-    authorize! :create, Vote
     if user_signed_in?
       # merge current_user.id into params
       merged_params = vote_params.merge(user_id: current_user.id)
@@ -28,7 +24,6 @@ class VotesController < ApplicationController
   # DELETE /votes/1
   # DELETE /votes/1.json
   def destroy
-    authorize! :destroy, Vote
     if user_signed_in?
       vote_id = params[:id]
       if vote_id == '0'

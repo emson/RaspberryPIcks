@@ -3,10 +3,11 @@ class Post < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   belongs_to :user
-  # has_many :voters, foreign_key: 'user_id', class_name: 'User', through: :votes
-  has_many :votes
+  has_many :votes, dependent: :destroy
+
   validates_presence_of :title
-  # accepts_nested_attributes_for :votes
+  validates_uniqueness_of :url
+
   after_create :create_default_vote
 
   private

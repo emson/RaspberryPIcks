@@ -3,12 +3,6 @@ require 'rails_helper'
 describe PostsController do
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:post) }
-
-  # # This should return the minimal set of values that should be in the session
-  # # in order to pass any filters (e.g. authentication) defined in
-  # # PostsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
   let(:user) { FactoryGirl.create(:user) }
 
   before :each do
@@ -33,15 +27,18 @@ describe PostsController do
 
   describe "GET new" do
     it "assigns a new post as @post" do
-      get :new, {}, valid_session
+      # sign_in user
+      expect(user.role).to eq('member')
+      get :new
       expect(assigns(:post)).to be_a_new(Post)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested post as @post" do
+      # sign_in user
       my_post = user.posts.create!(FactoryGirl.attributes_for(:post))
-      get :edit, {:id => my_post.to_param}, valid_session
+      get :edit, {:id => my_post.to_param}
       expect(assigns(:post)).to eq(my_post)
     end
   end
